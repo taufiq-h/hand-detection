@@ -4,7 +4,7 @@ use opencv::{
 };
 
 fn main() -> opencv::Result<()> {
-    // Membuka kamera (device 0, kamera laptop biasanya)
+    // Membuka kamera
     let mut cam = videoio::VideoCapture::new(0, videoio::CAP_ANY)?;
     if !videoio::VideoCapture::is_opened(&cam)? {
         panic!("Tidak bisa membuka kamera");
@@ -65,7 +65,7 @@ fn main() -> opencv::Result<()> {
             let contour = contours.get(i)?;
             let bounding_rect = imgproc::bounding_rect(&contour)?;
 
-            // Filter berdasarkan ukuran bounding box (abaikan kontur yang terlalu kecil/besar)
+            // Filter berdasarkan ukuran bounding box 
             if bounding_rect.width > 50 && bounding_rect.height > 50 {
                 // Gambar bounding box untuk kontur yang terdeteksi
                 imgproc::rectangle(
